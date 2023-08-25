@@ -1,32 +1,35 @@
 import numpy as np
 
-# Função de ativação (função degrau)
-def step_function(x):
-    if x >= 0:
-        return 1
-    else:
-        return 0
+#classe do modelo de Neurônio de McCulloch-Pitts
+class M_P:
+    def __init__(self, pesos, limite):
+        self.pesos = pesos
+        self.limite = limite
 
-# Definindo os pesos e o viés para a porta and
-weights = np.array([1, 1])  # Pesos positivos
-bias = -1.5  # Viés
+    # Cálculo das saídas
+    def ativando(self, entrada):
+        if len(entrada) != len(self.pesos): # como entrada e o peso são definidos no código, não tem risco dessa exceção ser levantada! 
+            raise ValueError("Número de entradas deve ser igual ao número de pesos.")
 
-# Função para calcular a saída do perceptron
-def perceptron(input_values, weights, bias):
-    net_input = np.dot(input_values, weights) + bias
-    output = step_function(net_input)
-    return output 
+        # Calcula a soma dos pesos das entradas
+        peso_soma = sum(w * x for w, x in zip(self.pesos, entrada))
 
-# Função para testar a porta AND
-def test_and_gate():
-    input_data = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])
+        # Aplica o limite de ativação da função
+        saida = 1 if peso_soma >= self.limite else 0
+        return saida
 
-    print("Input 1\tInput 2\tAND Output")
+if __name__ == '__main__':
+    # Define os pesos e o limite para o portão AND
+    and_pesos = np.array([1, 1])
+    and_limite = 2
 
-    for inputs in input_data:
-        input1, input2 = inputs
-        output = perceptron(inputs, weights, bias)
-        print(f"{input1}\t{input2}\t{output}")
+    # Cria uma instância do neurônio de M.P para o portão AND
+    and_neuronio = M_P(and_pesos, and_limite)
 
-if __name__ == "__main__":
-    test_and_gate()
+    # Define combinações de entradas para o portão AND 
+    input_combs = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])
+
+    # Testa o neurônio para cada entrada
+    for entrada in input_combs:
+        resultado = and_neuronio.ativando(entrada)
+        print(f"Entrada: {entrada}, Saída: {resultado}")
