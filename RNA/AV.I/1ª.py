@@ -27,9 +27,9 @@ if __name__ == '__main__':
     and_neuronio = M_P(and_pesos, and_limite)
 
     # Define combinações de entradas para o portão AND 
-    input_combs = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])
+    entrada_combinacoes = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])
 
     # Testa o neurônio para cada entrada
-    for entrada in input_combs:
+    for entrada in entrada_combinacoes:
         resultado = and_neuronio.ativando(entrada)
         print(f"Entrada: {entrada}, Saída: {resultado}")
