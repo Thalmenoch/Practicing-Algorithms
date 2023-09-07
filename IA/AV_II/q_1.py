@@ -14,7 +14,7 @@ def formar_dataset(linha,coluna):
     dados = organizar_dados(0,20,500)
 
     # vamos ver como ficaram os dados na forma de array
-    print(f"Dados: \n{dados}")
+    # print(f"Dados: \n{dados}")
 
     # vamos organizar em forma de dataset
     dados_organizados = dados.reshape(linha,coluna)
@@ -22,5 +22,6 @@ def formar_dataset(linha,coluna):
     # vamos ver como ficou os dados organizados
     return dados_organizados
 
-# vamos organizar em forma de dataset de 100 x 5
-formar_dataset(100,5)
+if __name__ == '__main__':
+    # vamos organizar em forma de dataset de 100 x 5
+    formar_dataset(100,5)
