@@ -1,31 +1,35 @@
 import numpy as np
-from sklearn.metrics import r2_score, mean_squared_error
 
-def ordenacao(dados1, dados2):
-    melhor_ordem = None
-    melhor_r2 = -np.inf
-    melhor_eqm = np.inf
+def organizar_dados(valor_inicial,valor_final,quantidade):
+    # 500 dados igualmente espaçados de 0 a 20
+    dados = np.linspace(valor_inicial, valor_final, quantidade)
 
-    for ordem in range(1, 10):  
-        coeficientes = np.polyfit(dados1, dados2, ordem)
-        y_previsto = np.polyval(coeficientes, dados1)
     
-        r2 = r2_score(dados2, y_previsto)
-        eqm = mean_squared_error(dados2, y_previsto)
-        
-        if r2 > melhor_r2:
-            melhor_r2 = r2
-            melhor_ordem = ordem
-            melhor_eqm = eqm
-        
-        return melhor_r2, melhor_ordem, melhor_eqm
+    return dados
 
-if __name__ == '__main__':
-    x = np.array([0, 3, -1, 4, 3, 5, 2, 10, 2, 4])
-    y = np.array([0.2, 0.8, 2.4, 6.5, 7.1, 7.5, 7.7, 8.1, 8.9, 10.2])
+    
+def formar_dataset(linha,coluna):
 
-    melhor_r2, melhor_ordem, melhor_eqm = ordenacao(x, y)
+    # 500 dados igualmente espaçados de 0 a 20
+    dados = organizar_dados(0,20,500)
 
-    print(f"Melhor ordem do polinômio: {melhor_ordem}")
-    print(f"Melhor R²: {melhor_r2:.2f}")
-    print(f"Melhor EQM: {melhor_eqm:.2f}")
+    # vamos organizar em forma de dataset
+    dados_organizados = dados.reshape(linha,coluna)
+
+    # vamos ver como ficou os dados organizados
+    return dados_organizados
+
+def zscore():
+
+    dataset = formar_dataset(100,5)
+
+    # Calcular a média e o desvio padrão ao longo das colunas (axis=0)
+    media = np.mean(dataset, axis=0)
+    desvio_padrao = np.std(dataset, axis=0)
+
+    # Calcular o Z-score
+    zscore = (dataset - media) / desvio_padrao
+
+    print(zscore)
+
+zscore()
