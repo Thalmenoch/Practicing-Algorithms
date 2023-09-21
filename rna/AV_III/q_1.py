@@ -19,7 +19,6 @@ def forward_pass(x):
 if __name__ == '__main__':
     x = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])
 
-    # Pesos gerados aleatoriamente
     np.random.seed(146)
     input_size = 2
     hidden_size = 2
