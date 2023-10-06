@@ -1,26 +1,27 @@
 import numpy as np
 
-# Função Sigmoid
-def sigmoid(x):
-    return 1 / (1 + np.exp(-x))
+# Função Hiperbólica
+def tanh(x):
+    return np.tanh(x)
 
-# Derivada da Função
-def sigmoid_derivative(x):
-    return x * (1 - x)
+# Derivada da função
+def tanh_derivative(x):
+    return 1 - np.tanh(x) ** 2
+
 
 def backpropagation(learning_rate, epochs, x, y, synapse_0, synapse_1):
     for epoch in range(epochs):
         # Etapa de feedforward
         layer_0 = x
-        layer_1 = sigmoid(np.dot(layer_0, synapse_0))
-        layer_2 = sigmoid(np.dot(layer_1, synapse_1))
+        layer_1 = tanh(np.dot(layer_0, synapse_0))
+        layer_2 = tanh(np.dot(layer_1, synapse_1))
 
         # Cálculo do erro
         error = y - layer_2
 
         # Etapa de retropropagação
-        delta_2 = error * sigmoid_derivative(layer_2)
-        delta_1 = delta_2.dot(synapse_1.T) * sigmoid_derivative(layer_1)
+        delta_2 = error * tanh_derivative(layer_2)
+        delta_1 = delta_2.dot(synapse_1.T) * tanh_derivative(layer_1)
 
         # Atualização dos pesos
         synapse_1 += layer_1.T.dot(delta_2) * learning_rate
