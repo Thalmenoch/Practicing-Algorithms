@@ -67,6 +67,5 @@ if __name__ == '__main__':
     # Treina a rede neural com usando o algoritmo de backpropagation
     layer_2 = backpropagation(learning_rate, epochs, x, y, synapse_0, synapse_1)
 
-    # Resultados após o treinamento
     print("Saída após o treinamento:")
     print(layer_2)
