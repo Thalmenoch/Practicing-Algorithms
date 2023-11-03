@@ -2,6 +2,7 @@ import numpy as np
 from MLP import MLP
 
 if __name__ == '__main__':
+    
     # Dados de entrada e saída
     entradas = np.array([[1, 1, 1],
                         [0, 1, 1],
@@ -30,9 +31,11 @@ if __name__ == '__main__':
 
     num_epocas = 1000
 
-    pesos_camada_entrada, pesos_camada_saida = MLP.treinar_mlp(entradas, saidas_desejadas, pesos_camada_entrada, pesos_camada_saida, taxa_aprendizado, num_epocas)
+    #chamada da classe
+    mlp = MLP(entradas, saidas_desejadas, pesos_camada_entrada, pesos_camada_saida, taxa_aprendizado, num_epocas)
+    pesos_camada_entrada, pesos_camada_saida = mlp.treinar_mlp()
 
-    previsoes = MLP.sigmoid(np.dot(MLP.sigmoid(np.dot(entradas, pesos_camada_entrada)), pesos_camada_saida))
+    previsoes = mlp.sigmoid(np.dot(mlp.sigmoid(np.dot(entradas, pesos_camada_entrada)), pesos_camada_saida))
 
     print("Saídas previstas:")
     for i, previsao in enumerate(previsoes):
