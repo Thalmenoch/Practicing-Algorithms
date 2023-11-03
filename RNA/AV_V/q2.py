@@ -6,7 +6,7 @@ def sigmoid_output(x):
 def sigmoid(x):
     return 1 / (1 + np.exp(-x))
 
-if __name__ == '__name__':
+if __name__ == '__main__':
     entradas = np.array([[1, 1],
                         [0, 1],
                         [1, 0],
